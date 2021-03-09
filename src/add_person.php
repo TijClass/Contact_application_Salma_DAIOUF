@@ -1,3 +1,35 @@
+<?php
+include "./connect_bd.php";
+
+if(isset($_POST["add"])){
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $adresse = $_POST['adresse'];
+    $phone = $_POST['phone'];
+    $group = $_POST['user-recommend'];
+    $notes = $_POST['message'];
+
+
+    if($firstname != "" && $lastname != "" && $email != "" && $adresse != "" && $phone != "" && $group != "" && $notes != ""  ){
+        $sql = "INSERT INTO contacts (`first_name`, `last_name`, `email`, `address1`, `phone`, `group`, `notes`)
+        VALUES ('$firstname', '$lastname', '$email' , '$adresse' , '$phone' , '$group' , '$notes')";
+
+        if (mysqli_query($conn, $sql)) {
+            $_POST["id"]= mysqli_insert_id($conn);
+            header('Location: ./logout.php');
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+
+        mysqli_close($conn);
+    }
+    else{
+        echo(0);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,17 +50,17 @@
         </div>
 
     </div>
-    <form id="form">
+    <form id="form" action="" method="post">
                     <label for="name" id="name-label" class="uno"> first Name</label>
-                    <input type="text" id="name" placeholder="Enter your first Name" requiered>
+                    <input type="text" id="name" placeholder="Enter your first Name" name="firstname" requiered>
                     <label for="name" id="name-label" class="uno">last Name</label>
-                    <input type="text" id="name" placeholder="Enter your last Name" requiered>
+                    <input type="text" id="name" placeholder="Enter your last Name" name="lastname" requiered>
                     <label for="email" id="email-label" class="uno">Email</label>
-                    <input type="email" id="email" placeholder="Enter your Email"  requiered>
+                    <input type="email" id="email" placeholder="Enter your Email" name="email" requiered>
                     <label for="adress" id="name-label" class="uno">Adress</label>
-                    <input type="text" id="name" placeholder="Enter your Adress" requiered>
+                    <input type="text" id="name" placeholder="Enter your Adress"name="adresse" requiered>
                     <label for="name" id="name-label" class="uno">Phone</label>
-                    <input type="text" id="name" placeholder="Enter your Phone" requiered>
+                    <input type="text" id="name" placeholder="Enter your Phone" name="phone" requiered>
                     <div class="bot">
                         <input type="radio" name="user-recommend" value="definitely" class="input" checked>
                         <label for="btn" id="btn-label" class="uno">family</label>
@@ -42,8 +74,7 @@
 
                     <div class="w3-container">
         
-                    <a href="" 
-                    class="button">Submit</a>
+                    <button type="submit" name="add" class="button">Submit</button>
                     </div>
                     </div>
         
@@ -52,3 +83,6 @@
     </div>
                     
                 </form>
+</body>
+</html>
+
