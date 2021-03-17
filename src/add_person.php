@@ -1,18 +1,17 @@
 <?php
 include "./connect_bd.php";
 
-if(isset($_POST["add"])){
+if(isset($_POST['add'])){
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
     $adresse = $_POST['adresse'];
     $phone = $_POST['phone'];
-    $group = $_POST['user-recommend'];
+    $group = $_POST['grp'];
     $notes = $_POST['message'];
 
-
     if($firstname != "" && $lastname != "" && $email != "" && $adresse != "" && $phone != "" && $group != "" && $notes != ""  ){
-        $sql = "INSERT INTO contacts (`first_name`, `last_name`, `email`, `address1`, `phone`, `group`, `notes`)
+        $sql = "INSERT INTO contacts (`first_name`, `last_name`, `email`, `address1`, `phone`, `grp`, `notes`)
         VALUES ('$firstname', '$lastname', '$email' , '$adresse' , '$phone' , '$group' , '$notes')";
 
         if (mysqli_query($conn, $sql)) {
@@ -40,19 +39,9 @@ if(isset($_POST["add"])){
     <title>Contact</title>
 </head>
 <body>
-<div id="mod" class="modal">
-        <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="" >
-        
-            </div>
-        
-        </div>
-
-    </div>
-    <form id="form" action="" method="post">
+    <form id="form" action="add_person.php" method="post">
                     <label for="name" id="name-label" class="uno"> first Name</label>
-                    <input type="text" id="name" placeholder="Enter your first Name" name="firstname" requiered>
+                    <input type="text" id="name" placeholder="Enter your first Name" requiered name="firstname">
                     <label for="name" id="name-label" class="uno">last Name</label>
                     <input type="text" id="name" placeholder="Enter your last Name" name="lastname" requiered>
                     <label for="email" id="email-label" class="uno">Email</label>
@@ -62,15 +51,15 @@ if(isset($_POST["add"])){
                     <label for="name" id="name-label" class="uno">Phone</label>
                     <input type="text" id="name" placeholder="Enter your Phone" name="phone" requiered>
                     <div class="bot">
-                        <input type="radio" name="user-recommend" value="definitely" class="input" checked>
+                        <input type="radio" name="grp" value="family" class="input" checked>
                         <label for="btn" id="btn-label" class="uno">family</label>
-                        <input type="radio" name="user-recommend" value="maybe" class="input">
+                        <input type="radio" name="grp" value="friend" class="input">
                         <label for="btn" id="btn-label" class="uno">friend</label>
-                        <input type="radio" name="user-recommend" value="not-sure" class="input">
+                        <input type="radio" name="grp" value="Business" class="input">
                         <label for="btn" id="btn-label" class="uno">Businness</label>
                     </div>
-                    <label for="name" id="name-label" class="unoo">notes</label>
-                    <textarea id="message" class="textarea uno" name="message" placeholder="Enter your message here..."></textarea>
+                    <label for="name" id="name-label" class="unoo">Notes:</label>
+                    <textarea id="message" class="textarea uno" name="message" requiered placeholder="Enter your message here..."></textarea>
 
                     <div class="w3-container">
         

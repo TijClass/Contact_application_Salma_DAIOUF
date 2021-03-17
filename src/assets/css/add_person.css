@@ -8,14 +8,13 @@ body{
     
 }
 form{
-    height: 90%;
+    height: 80%;
     display: flex;
     justify-content: center;
     margin-left: 30%;
     flex-direction: column;
     color:black;
     width: 40%;
-    margin-top: 3%;
     padding-left: 2%;
     background: #D0CDD9;
 }
@@ -25,7 +24,7 @@ form input{
     border: 1px solid #000000;
     width: 95%;
     margin: 0;
-    height: 45px;    opacity: 50%;
+    height: 40px;    opacity: 50%;
 }
 
 label {

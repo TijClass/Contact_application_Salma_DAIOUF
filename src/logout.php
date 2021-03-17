@@ -1,3 +1,12 @@
+<?php
+  require('./connect_bd.php');
+  $sql = "SELECT * FROM contacts";
+  $result = mysqli_query($conn, $sql);
+
+//   while($row = $result->fetch_assoc()) {
+//     var_dump($row);
+//    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,69 +56,33 @@
             <th scope="col">First-Name</th>
             <th scope="col">Last-Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Adress</th>
             <th scope="col">Phone</th>
+            <th scope="col">Adress</th>
             <th scope="col">Group</th>
             <th scope="col">Action</th>
             <th></th>
             </tr>
         </thead>
         <tbody>
+       <?php $id =0;
+       while($row = $result->fetch_assoc()) {
+           $id++; ?>
             <tr>
-            <th scope="row">5001</th>
-            <td>Jadwa</td>
-            <td>DAIOUF</td>
-            <td>daioufsali@gmail.com</td>
-            <td>casablanca</td>
-            <td>0644774447</td>
-            <td>Family</td>
-            <td><a href="#">Edit</a></td>
-            <td><i  class="fas fa-times-circle"></i></td>
+            <th scope="row"><?= $id ?></th>
+            <td><?= $row['first_name'] ?></td>
+            <td><?= $row['last_name'] ?></td>
+            <td><?= $row['email'] ?></td>
+            <td><?= $row['phone'] ?></td>
+            <td><?= $row['address1'] ?></td>
+            <td><?= $row['grp'] ?></td>
+            <td><?= $row['notes'] ?></td>   
+            <td>
+				<a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
+				<a href="./delet.php?id=<?php echo $row['id']; ?>"><i class="fas fa-times-circle"></i></a>
+                
+			</td>
             </tr>
-            <tr>
-            <th scope="row">5002</th>
-            <td>Jadwa</td>
-            <td>DAIOUF</td>
-            <td>daioufsali@gmail.com</td>
-            <td>casablanca</td>
-            <td>0644774447</td>
-            <td>Family</td>
-            <td><a href="#">Edit</a></td>
-            <td><i  class="fas fa-times-circle"></i></td>
-            </tr>
-            <tr>
-            <th scope="row">5003</th>
-            <td>Jadwa</td>
-            <td>DAIOUF</td>
-            <td>daioufsali@gmail.com</td>
-            <td>casablanca</td>
-            <td>0644774447</td>
-            <td>Family</td>
-            <td><a href="#">Edit</a></td>
-            <td><i  class="fas fa-times-circle"></i></td>
-            </tr>
-            <tr>
-            <th scope="row">5004</th>
-            <td>Jadwa</td>
-            <td>DAIOUF</td>
-            <td>daioufsali@gmail.com</td>
-            <td>casablanca</td>
-            <td>0644774447</td>
-            <td>Family</td>
-            <td><a href="#">Edit</a></td>
-            <td><i  class="fas fa-times-circle"></i></td>
-            </tr>
-            <tr>
-            <th scope="row">5006</th>
-            <td>Jadwa</td>
-            <td>DAIOUF</td>
-            <td>daioufsali@gmail.com</td>
-            <td>casablanca</td>
-            <td>0644774447</td>
-            <td>Family</td>
-            <td><a href="#">Edit</a></td>
-            <td><i  class="fas fa-times-circle"></i></td>
-            </tr>
+            <?php  }?>
         </tbody>
         </table>
     </div>
